@@ -17,5 +17,9 @@ class Applecation{
         $this->Router = new Router();
         echo "Hello World!";
     }
+
+    public function run(){
+        // todo
+    }
 }
 ?>
