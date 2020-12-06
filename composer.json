@@ -1,0 +1,16 @@
+{
+    "name": "realmosalah/anyns-feed",
+    "authors": [
+        {
+            "name": "Mohammad Salah",
+            "email": "redmohammad22@Gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\":"./App/",
+            "Core\\":"./Core/"
+        }
+    },
+    "require": {}
+}
