@@ -10,12 +10,16 @@ namespace Core;
  */
 class Debugger{
 
-    public function printArr($arr){
+    public function printArr($arr)
+    {
         echo "<pre>";
         var_dump($arr);
         echo "</pre>";
     }
-
+    public function print($element)
+    {
+        echo $element . "<br>";
+    }
 }
 
 ?>

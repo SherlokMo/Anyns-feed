@@ -1,6 +1,8 @@
 <?php 
 namespace Core;
 
+use App\Applecation;
+
 /**
  * Class Router
  * 
@@ -13,7 +15,7 @@ class Router{
     public $Debugger;
 
     /**
-     * Our routes will be an associated Array:
+     * $routes will be an associated Array:
      *      $routes = [
      *          "get" => [
      *              "Path"=>callback,
@@ -44,12 +46,48 @@ class Router{
         $this->routes['get'][$path] = $callback;
     }
     
-    public function promise(){
-
+    public function promise()
+    {
         $path = $this->Request->getPath();
         $method = $this->Request->getMethod();
-        $this->Debugger->printArr($path);
+        $callback = $this->routes[$method][$path] ?? false;
+        if(!$callback){
+            return "Page Not found";
+        }
+        if(is_string($callback)){
+            return $this->render($callback);
+        }
+        return call_user_func($callback);
+    }
+    
+    /**
+     * replacing the buffered content with the view content
+     */
+    public function render($view)
+    {
+        $templateContent = $this->templateRender();
+        $viewContent = $this->viewContent($view);
+        return str_replace("{{content}}",$viewContent,$templateContent);
+    }
 
+    /**
+     * buffering content from the template layout ( we dont want HTML duplications )
+     */
+    protected function templateRender()
+    {
+        ob_start();
+        include_once Applecation::$ROOT."/public/layout/main.php";
+        return ob_get_clean();
+    }
+
+    /**
+     * buffering view Content (Data we actually looking for)
+     */
+    protected function viewContent($view)
+    {
+        ob_start();
+        include_once Applecation::$ROOT."/App/Views/$view.php";
+        return ob_get_clean();
     }
 
 }

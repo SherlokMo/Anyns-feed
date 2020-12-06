@@ -11,18 +11,20 @@ use Core\Debugger;
  */
 class Applecation{
     
+    public static $ROOT;
     public $Router;
     public $Requests;
     public $Debugger;
-    public function __construct()
+    public function __construct($rootPath)
     {
+        self::$ROOT = $rootPath;
         $this->Requests = new Request();
         $this->Debugger = new Debugger();
         $this->Router = new Router($this->Requests,$this->Debugger);
     }
 
     public function run(){
-        $this->Router->promise();
+        echo $this->Router->promise();
     }
 }
 ?>
