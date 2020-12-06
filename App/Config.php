@@ -19,5 +19,22 @@ class Config {
     const username = "root";
 
     const password = "";
+
+    /**
+     * apache config for Routes fixing
+     */
+    const apache = TRUE;
+
+    /**
+     * Project Name
+     */
+    const projectName = "Anyns-feed";
+
+    public static function isApache(){
+        if(Config::apache){
+            return true;
+        }
+        return false;
+    }
 }
 ?>

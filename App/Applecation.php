@@ -1,7 +1,8 @@
 <?php 
 namespace App;
 use Core\Router;
-
+use Core\Request;
+use Core\Debugger;
 /**
  * Class Applecation
  * 
@@ -11,15 +12,17 @@ use Core\Router;
 class Applecation{
     
     public $Router;
-
+    public $Requests;
+    public $Debugger;
     public function __construct()
     {
-        $this->Router = new Router();
-        echo "Hello World!";
+        $this->Requests = new Request();
+        $this->Debugger = new Debugger();
+        $this->Router = new Router($this->Requests,$this->Debugger);
     }
 
     public function run(){
-        // todo
+        $this->Router->promise();
     }
 }
 ?>
