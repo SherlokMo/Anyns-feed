@@ -16,9 +16,11 @@ class Debugger{
         var_dump($arr);
         echo "</pre>";
     }
-    public function print($element)
+    public function print(...$element)
     {
-        echo $element . "<br>";
+        foreach($element as $el){
+            echo $el . "<br>";
+        }
     }
 }
 
