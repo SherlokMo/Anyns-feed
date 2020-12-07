@@ -16,6 +16,7 @@ class Request{
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         if(Config::isApache()){
             $path = str_ireplace("/".Config::projectName."/","",$path);
+            $path = str_ireplace("/","",$path);
             if($path === ""){
                 $path = "/";
             }
