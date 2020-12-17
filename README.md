@@ -51,13 +51,13 @@ There are many great MVC Frameworks available on GitHub, however, I didn't find 
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem and helps others.
-* You shouldn't be doing the same tasks over and over like creating a Validations, Authentications from scratch
+* You shouldn't be doing the same tasks over and over like creating validations and authentications from scratch
 
 ### Built With
 
 * [PHP](https://www.php.net)
+* [Composer](https://getcomposer.org/)
 * MYSQL database
-* Composer
 
 <!-- GETTING STARTED -->
 ## Getting Started
