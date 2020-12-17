@@ -96,7 +96,7 @@ This is an instruction about how to get the Framework and modify it to work perf
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* If you use XAMPP your can directly by starting Apache
+* If you have XAMPP your can directly by starting Apache
 * You can start using php built in server by typing this on terminal
    ```sh
    cd YOUR_PROJECT_PATH
