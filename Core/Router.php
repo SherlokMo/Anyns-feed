@@ -13,9 +13,10 @@ class Router{
 
     public $Request;
     public $Debugger;
+    public $Response;
 
     /**
-     * $routes will be an associated Array:
+     * routes will be an associated Array:
      *      $routes = [
      *          "get" => [
      *              "Path"=>callback,
@@ -34,46 +35,77 @@ class Router{
      * 
      * @param object | \Core\Request $request
      * @param object | \Core\Debugger $debugger
+     * @param object | \Core\Response $response
      */
-    public function __construct(\Core\Request $request,\Core\Debugger $debugger)
+    public function __construct(\Core\Request $request,\Core\Debugger $debugger,\Core\Response $response)
     {
         $this->Request = $request;
         $this->Debugger = $debugger;
+        $this->Response = $response;
     }
 
-    public function get($path,$callback)
+    /**
+     * Get method adds new get index to routes
+     * @return void
+     */
+    public function get($path,$callback): void
     {
         $this->routes['get'][$path] = $callback;
     }
+
+    /**
+     * Post method adds new post index to routes
+     * @return void
+     */
+    public function post($path, $callback): void
+    {
+        $this->routes['post'][$path] = $callback;
+    }
     
+    /**
+     * Resolves page output
+     * @return callback|string
+     */
     public function promise()
     {
         $path = $this->Request->getPath();
         $method = $this->Request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
-        if(!$callback){
-            return "Page Not found";
+        if(!$callback)
+        {
+            $this->Response->setStatusCode(404);
+            return $this->render("_404");
         }
-        if(is_string($callback)){
+        if(is_string($callback))
+        {
             return $this->render($callback);
+        }
+        if(is_array($callback))
+        {
+            /**
+             * creating an instance of the object to avoide Using $this when not in object context on Controllers
+             */
+            $callback[0] = new $callback[0](); 
         }
         return call_user_func($callback);
     }
     
     /**
      * replacing the buffered content with the view content
+     * @return string page content after replacement
      */
-    public function render($view)
+    public function render($view,$params = []): string
     {
         $templateContent = $this->templateRender();
-        $viewContent = $this->viewContent($view);
+        $viewContent = $this->viewContent($view,$params);
         return str_replace("{{content}}",$viewContent,$templateContent);
     }
 
     /**
      * buffering content from the template layout ( we dont want HTML duplications )
+     * @return string  (HTML code)
      */
-    protected function templateRender()
+    protected function templateRender(): string
     {
         ob_start();
         include_once Applecation::$ROOT."/public/layout/main.php";
@@ -81,10 +113,22 @@ class Router{
     }
 
     /**
-     * buffering view Content (Data we actually looking for)
+     * buffering view Content (Data we actually are looking for)
+     * @return string (HTML code)
      */
-    protected function viewContent($view)
+    protected function viewContent($view, $params): string
     {
+
+        foreach($params as $key => $value)
+        {
+            /**
+             * Variable variable  ($$)
+             * if key is name and value is mohammad then it is as declearing:
+             * $name = mohammad
+             */
+            $$key = $value;
+        }
+
         ob_start();
         include_once Applecation::$ROOT."/App/Views/$view.php";
         return ob_get_clean();

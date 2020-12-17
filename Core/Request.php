@@ -1,6 +1,7 @@
 <?php 
 namespace Core;
 
+use App\Applecation;
 use App\Config;
 
 /**
@@ -11,15 +12,15 @@ use App\Config;
  */
 class Request{
 
-    public function getPath()
+    /**
+     * Returns path name
+     * @return string
+     */
+    public function getPath(): string
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         if(Config::isApache()){
-            $path = str_ireplace("/".Config::projectName."/","",$path);
-            $path = str_ireplace("/","",$path);
-            if($path === ""){
-                $path = "/";
-            }
+            $path = $this->getApachePath($path);
         }
         $pos = strpos($path,'?');
         if(!$pos){
@@ -28,12 +29,57 @@ class Request{
         return substr($path,0,$pos);
     }
     
-    public function getMethod()
+    /**
+     * Returns Path on Apache
+     * 
+     * @return string
+     */
+    private function getApachePath($path){
+        $path = str_ireplace("/".Config::projectName."/","",$path);
+        if($path[0] === "?"){
+            return "/";
+        }
+        return str_ireplace("/","",$path);
+    }
+
+    /**
+     * Returns method type
+     * 
+     * @return string
+     */
+    public function getMethod(): string
     {
         /**
          * Returning lowercase because our $route method parameter is lowercase
          */
         return strtolower($_SERVER['REQUEST_METHOD']);
+    }
+
+    /**
+     * Returns request body but sanitaized ( Without special chars )
+     * 
+     * @return array
+     */
+    public function getBody(): array
+    {
+        $body = [];
+        if($this->getMethod() === 'get'){
+
+            foreach($_GET as $key => $value){
+                $body[$key] = Applecation::$app->Sanitizer->xss_clean($value);
+            }
+
+        }
+
+        if($this->getMethod() === 'post'){
+
+            foreach($_POST as $key => $value){
+                $body[$key] = Applecation::$app->Sanitizer->xss_clean($value);
+            }
+            
+        }
+
+        return $body;
     }
 
 }
