@@ -68,6 +68,7 @@ This is an instruction about how to get the Framework and modify it to work perf
 
 * PHP
 * XAMPP (Optional)
+* Composer
 
 ### Installation
 
@@ -80,13 +81,16 @@ This is an instruction about how to get the Framework and modify it to work perf
    ```PHP
    const directory = 'ENTER YOUR DIRECTORY NAME';
    ```
-3. On Production Enviroment change localEnviroment in 'App\Config.php'
+2. create a vendor file to autoload classes using composer
+   ```sh
+   cd YOUR_PROJECT_PATH
+   composer update
+   ```
+4. On Production Enviroment change localEnviroment in 'App\Config.php'
    ```PHP
    const localEnviroment = FALSE;
    ```
-
-
-4. That's it! :smile:
+5. That's it! :smile:
 
 
 <!-- USAGE EXAMPLES -->
