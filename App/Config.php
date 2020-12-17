@@ -23,7 +23,7 @@ class Config {
     /**
      * apache config for Routes fixing
      */
-    const apache = TRUE;
+    const localEnviroment = TRUE;
 
     /**
      * Project Name
@@ -31,7 +31,7 @@ class Config {
     const directory = "Anyns-feed";
 
     public static function isApache(){
-        if(Config::apache){
+        if(Config::localEnviroment){
             return true;
         }
         return false;
