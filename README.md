@@ -57,7 +57,7 @@ Here's why:
 
 * [PHP](https://www.php.net)
 * MYSQL database
-
+* Composer
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -81,7 +81,7 @@ This is an instruction about how to get the Framework and modify it to work perf
    ```PHP
    const directory = 'ENTER YOUR DIRECTORY NAME';
    ```
-2. create a vendor file to autoload classes using composer
+2. create a vendor folder to autoload classes using composer
    ```sh
    cd YOUR_PROJECT_PATH
    composer update
