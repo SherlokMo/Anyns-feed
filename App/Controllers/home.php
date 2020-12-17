@@ -23,9 +23,10 @@ class home extends Controller
         $paramaters = [
             "name"=>"TEST",
         ];
-        if($Request->isGet()){
-            return $this->render("home",$paramaters);
+        if($Request->isPost()){
+            return "I AM HANDLING YOUR ACTION!";
         }
+        return $this->render('home',$paramaters);
         // ... todo
 
     }

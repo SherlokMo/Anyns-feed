@@ -38,7 +38,7 @@ class Request
     private function getApachePath($path)
     {
         $path = str_ireplace("/".Config::directory."/","",$path);
-        if($path === "" || $path[0] === "?")
+        if($path === "" || $path[0] === "?" || $path === "/")
         {
             return "/";
         }
