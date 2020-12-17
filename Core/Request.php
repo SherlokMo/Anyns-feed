@@ -10,7 +10,8 @@ use App\Config;
  * @author Mohammad Salah <redmohammad22@gmail.com>
  * @package Core
  */
-class Request{
+class Request
+{
 
     /**
      * Returns path name
@@ -34,9 +35,11 @@ class Request{
      * 
      * @return string
      */
-    private function getApachePath($path){
+    private function getApachePath($path)
+    {
         $path = str_ireplace("/".Config::directory."/","",$path);
-        if($path[0] === "?"){
+        if($path === "" || $path[0] === "?")
+        {
             return "/";
         }
         return str_ireplace("/","",$path);
@@ -56,6 +59,34 @@ class Request{
     }
 
     /**
+     * isGet Method
+     * 
+     * @return bool
+     */
+    public function isGet(): bool
+    {
+        if($this->getMethod() === "get")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * isPost Method
+     * 
+     * @return bool
+     */
+    public function isPost(): bool
+    {
+        if($this->getMethod() === "post")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Returns request body but sanitaized ( Without special chars )
      * 
      * @return array
@@ -63,17 +94,21 @@ class Request{
     public function getBody(): array
     {
         $body = [];
-        if($this->getMethod() === 'get'){
+        if($this->getMethod() === 'get')
+        {
 
-            foreach($_GET as $key => $value){
+            foreach($_GET as $key => $value)
+            {
                 $body[$key] = Applecation::$app->Sanitizer->xss_clean($value);
             }
 
         }
 
-        if($this->getMethod() === 'post'){
+        if($this->getMethod() === 'post')
+        {
 
-            foreach($_POST as $key => $value){
+            foreach($_POST as $key => $value)
+            {
                 $body[$key] = Applecation::$app->Sanitizer->xss_clean($value);
             }
             

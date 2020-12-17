@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Applecation;
 use Core\Controller;
+use Core\Request;
 
 /**
  * Class homeController 
@@ -17,12 +18,14 @@ class home extends Controller
 {
 
 
-    public function home(){
+    public function home(\Core\Request $Request){
 
         $paramaters = [
             "name"=>"TEST",
         ];
-        echo $this->render("home",$paramaters);
+        if($Request->isGet()){
+            return $this->render("home",$paramaters);
+        }
         // ... todo
 
     }

@@ -11,14 +11,15 @@ class Config {
     
     /**
      * Host name is localhost on local enviroment
+     * change name to your database name
+     * user
      */
-    const host = "localhost";
-
-    const dbname = "DB_NAME";
-
-    const username = "root";
-
-    const password = "";
+    const dbInfo = [
+        "host" => "localhost",
+        "DB_NAME" => "DB_NAME",
+        "username" => "root",
+        "password" => ""
+    ];
 
     /**
      * apache config for Routes fixing
