@@ -86,7 +86,7 @@ This is an instruction about how to get the Framework and modify it to work perf
    cd YOUR_PROJECT_PATH
    composer update
    ```
-4. On Production Enviroment change localEnviroment in 'App\Config.php'
+4. On Production Enviroment change localEnviroment in `App\Config.php`
    ```PHP
    const localEnviroment = FALSE;
    ```
