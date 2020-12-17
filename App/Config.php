@@ -28,7 +28,7 @@ class Config {
     /**
      * Project Name
      */
-    const projectName = "Anyns-feed";
+    const directory = "Anyns-feed";
 
     public static function isApache(){
         if(Config::apache){

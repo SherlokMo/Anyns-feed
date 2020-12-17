@@ -35,7 +35,7 @@ class Request{
      * @return string
      */
     private function getApachePath($path){
-        $path = str_ireplace("/".Config::projectName."/","",$path);
+        $path = str_ireplace("/".Config::directory."/","",$path);
         if($path[0] === "?"){
             return "/";
         }
