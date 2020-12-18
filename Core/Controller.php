@@ -11,8 +11,26 @@ use App\Applecation;
  */
 class Controller{
 
-    public function render($view, $params = []){
+
+    public $layout = "main";
+
+    /**
+     * Rendering view
+     * 
+     * @param string| $view file name
+     * @param array| $params array with parameters
+     */
+    public function render($view, $params = [])
+    {
         return Applecation::$app->Router->render($view,$params);
+    }
+
+    /**
+     * @param string $layout
+     */
+    public function setLayout($layout): void
+    {
+        $this->layout = $layout;
     }
 
     

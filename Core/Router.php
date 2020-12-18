@@ -14,7 +14,6 @@ class Router{
     public $Request;
     public $Debugger;
     public $Response;
-
     /**
      * routes will be an associated Array:
      *      $routes = [
@@ -29,6 +28,8 @@ class Router{
      *      ]
      */
     protected $routes = [];
+
+    protected $layout = "main";
 
     /**
      * Router Constructor 
@@ -82,10 +83,16 @@ class Router{
         }
         if(is_array($callback))
         {
+
+            /**
+             * Instance of controller that Applecation has
+             */
+            Applecation::$app->Controller = new $callback[0](); 
+
             /**
              * creating an instance of the object to avoide Using $this when not in object context on Controllers
              */
-            $callback[0] = new $callback[0](); 
+            $callback[0] = Applecation::$app->Controller;
         }
         return call_user_func($callback,$this->Request,$this->Debugger);
     }
@@ -107,8 +114,9 @@ class Router{
      */
     protected function templateRender(): string
     {
+        $layout = Applecation::$app->Controller->layout;
         ob_start();
-        include_once Applecation::$ROOT."/public/layout/main.php";
+        include_once Applecation::$ROOT."/public/layout/$layout.php";
         return ob_get_clean();
     }
 

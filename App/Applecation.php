@@ -1,5 +1,6 @@
 <?php 
 namespace App;
+
 use Core\Router;
 use Core\Request;
 use Core\Debugger;
@@ -22,6 +23,11 @@ class Applecation{
     public $Sanitizer;
 
     /**
+     * Instance of the Controller children than inherits Controller parent
+     */
+    public $Controller;
+
+    /**
      * static property of this object instanse.
      * @return object
      */
@@ -40,6 +46,22 @@ class Applecation{
 
     public function run(){
         echo $this->Router->promise();
+    }
+
+    /**
+     * @return \Core\Controller 
+     */
+    public function getController(): \Core\Controller 
+    {
+        return $this->Controller;
+    }
+
+    /**
+     * @param \Core\Controller $Controller
+     */
+    public function setController(\Core\Controller $controller): void
+    {
+        $this->Controller = $controller;
     }
 }
 ?>
