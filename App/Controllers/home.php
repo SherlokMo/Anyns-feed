@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Applecation;
 use Core\Controller;
-use Core\Request;
 
 /**
  * Class homeController 

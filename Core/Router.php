@@ -75,7 +75,7 @@ class Router{
         if(!$callback)
         {
             $this->Response->setStatusCode(404);
-            return $this->render("_404");
+            return $this->layoutRender("_404");
         }
         if(is_string($callback))
         {
@@ -108,6 +108,10 @@ class Router{
         return str_replace("{{content}}",$viewContent,$templateContent);
     }
 
+    public function layoutRender($view){
+        $params = [];
+        return $this->viewContent($view,$params);
+    }
     /**
      * buffering content from the template layout ( we dont want HTML duplications )
      * @return string  (HTML code)

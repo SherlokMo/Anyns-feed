@@ -2,7 +2,7 @@
 use App\Config;
 use Core\Model;
 
-class DB extends Model{
+class DB{
     private static function connect(){
         $pdo = new PDO('mysql:host='.Config::dbInfo['host'].';dbname='.Config::dbInfo['DB_NAME'].';charset=utf8;collation=utf8_unicode_ci', Config::dbInfo['username'], Config::dbInfo['password']);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
