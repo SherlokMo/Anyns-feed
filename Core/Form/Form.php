@@ -52,9 +52,9 @@ class Form
     /**
      * @return \Core\Form\Field
      */
-    public function field($model,$attribute,$type="text"): \Core\Form\Field
+    public function field($model,$attribute): \Core\Form\Field
     {
-        return new Field($model,$attribute,$type);
+        return new Field($model,$attribute);
     }
 
 }

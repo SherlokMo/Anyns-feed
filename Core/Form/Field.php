@@ -13,6 +13,9 @@ use function PHPSTORM_META\type;
 
 class Field
 {
+    public const TYPE_TEXT = "text";
+    public const TYPE_PASSWORD = "password";
+    public const TYPE_EMAIL = "email";
 
     public $attribute;
     public $type;
@@ -24,10 +27,10 @@ class Field
      * @param \Core\Model $model
      * @param string $attribute
      */
-    public function __construct(\Core\Model $model, string $attribute,string $type)
+    public function __construct(\Core\Model $model, string $attribute)
     {
         $this->attribute = $attribute;
-        $this->type = $type;
+        $this->type = self::TYPE_TEXT;
         $this->model = $model;
     }
 
@@ -45,7 +48,19 @@ class Field
         $this->attribute,
         $this->type,
         $this->model->getError($this->attribute),
-    );
+        );
+    }
+
+    public function setPasswordField()
+    {
+        $this->type = SELF::TYPE_PASSWORD;
+        return $this;
+    }
+
+    public function setEmailField()
+    {
+        $this->type = SELF::TYPE_EMAIL;
+        return $this;
     }
 }
 
