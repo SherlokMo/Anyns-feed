@@ -10,18 +10,6 @@ namespace App;
 class Config {
     
     /**
-     * Host name is localhost on local enviroment
-     * change name to your database name
-     * user
-     */
-    const dbInfo = [
-        "host" => "localhost",
-        "DB_NAME" => "DB_NAME",
-        "username" => "root",
-        "password" => ""
-    ];
-
-    /**
      * apache config for Routes fixing
      */
     const localEnviroment = TRUE;
@@ -36,6 +24,15 @@ class Config {
             return true;
         }
         return false;
+    }
+
+    public static function getDB()
+    {
+         return [
+            'dsn' => $_ENV['DB_DSN'],
+            "user" => $_ENV['DB_USER'],
+            "password" => $_ENV['DB_PASSWORD']
+        ];    
     }
 }
 ?>

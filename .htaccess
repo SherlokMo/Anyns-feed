@@ -1,2 +1,6 @@
 RewriteEngine On
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?url=$1
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

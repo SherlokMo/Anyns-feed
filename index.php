@@ -6,7 +6,14 @@ use App\Controllers\authController;
 
 require_once __DIR__.'/vendor/autoload.php';
 
-$app = new Applecation(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$config = [
+    'db'=> \App\Config::getDB()
+];
+
+$app = new Applecation(__DIR__,$config);
 
 $app->Router->get("/",[home::class,'home']);
 $app->Router->post("/",[home::class,'home']);

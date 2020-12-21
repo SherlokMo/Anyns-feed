@@ -1,6 +1,7 @@
 <?php 
 namespace App;
 
+use Core\Database\Database;
 use Core\Router;
 use Core\Request;
 use Core\Debugger;
@@ -21,6 +22,7 @@ class Applecation{
     public $Debugger;
     public $Response;
     public $Sanitizer;
+    public $db;
 
     /**
      * Instance of the Controller children than inherits Controller parent
@@ -33,7 +35,7 @@ class Applecation{
      */
     public static $app;
 
-    public function __construct($rootPath)
+    public function __construct($rootPath,array $config)
     {
         self::$ROOT = $rootPath;
         $this->Requests = new Request();
@@ -42,6 +44,7 @@ class Applecation{
         $this->Sanitizer = new Sanitizer();
         self::$app = $this; 
         $this->Router = new Router($this->Requests,$this->Debugger,$this->Response);
+        $this->db = new Database($config['db']);
     }
 
     public function run(){

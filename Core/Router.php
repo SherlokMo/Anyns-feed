@@ -85,7 +85,7 @@ class Router{
         {
 
             /**
-             * Instance of controller that Applecation has
+             * Instance of controller that Applecation has (to change layout)
              */
             Applecation::$app->Controller = new $callback[0](); 
 

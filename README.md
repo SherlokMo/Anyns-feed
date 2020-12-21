@@ -58,6 +58,7 @@ Here's why:
 * [PHP](https://www.php.net)
 * [Composer](https://getcomposer.org/)
 * MYSQL database
+* [phpdotenv](https://github.com/vlucas/phpdotenv)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -81,16 +82,17 @@ This is an instruction about how to get the Framework and modify it to work perf
    ```PHP
    const directory = 'ENTER YOUR DIRECTORY NAME';
    ```
-2. create a vendor folder to autoload classes using composer
+3. Create `.env` file from `.env.example` file and adjust database parameters
+4. create a vendor folder to autoload classes using composer
    ```sh
    cd YOUR_PROJECT_PATH
-   composer update
+   composer install
    ```
-4. On Production Enviroment change localEnviroment in `App\Config.php`
+5. On Production Enviroment change localEnviroment in `App\Config.php`
    ```PHP
    const localEnviroment = FALSE;
    ```
-5. That's it! :smile:
+6.That's it! :smile:
 
 
 <!-- USAGE EXAMPLES -->
@@ -104,6 +106,7 @@ This is an instruction about how to get the Framework and modify it to work perf
    ```
   Your Server Will listen on port 3000 (You can change the port)
   For More Information about php built in web server check out [PHP Built In Server DOCS](https://www.php.net/manual/en/features.commandline.webserver.php)
+* Open in browser `http://127.1.1.0:3000`
 
 
 <!-- CONTRIBUTING -->

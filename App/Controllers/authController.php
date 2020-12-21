@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Applecation;
-use App\Models\registerModel;
+use App\Models\User;
 use Core\Controller;
 
 /**
@@ -20,22 +20,23 @@ class authController extends Controller
 
     public function register(\Core\Request $Request){
         
-        $registerModel = new registerModel();
+        $user = new User();
 
         if($Request->isPost()){
 
-            $registerModel->loadData($Request->getBody());
+            $user->loadData($Request->getBody());
 
-            if($registerModel->validate()){
+            if($user->validate() && $user->register()){
                 return "processing";
             }
+
             return $this->render('register',[
-                'model' => $registerModel
+                'model' => $user
             ]);    
         }
 
         return $this->render('register',[
-            'model' => $registerModel
+            'model' => $user
         ]);
     }
 
